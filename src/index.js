@@ -183,6 +183,8 @@ timeslot.sumTimeSlot(TimeSlot.getTimeSlot("19:12", "20:26"));
 // ts.sumTimeSlot(TimeSlot.getTimeSlot("09:12", "13:26"));
 // ts.sumTimeSlot(TimeSlot.getTimeSlot("09:22", "19:26"));
 console.log(timeslot);
+console.log(JSON.stringify(timeslot));
+console.log(JSON.stringify(timeslot.TimeSlotMap));
 
 document.getElementById("app").innerHTML = `
 
