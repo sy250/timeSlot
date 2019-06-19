@@ -1,2 +1,0 @@
-# timeSlot
-Created with CodeSandbox
