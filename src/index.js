@@ -5,9 +5,8 @@ moment.locale("ja");
 class TimeSlot {
   // constructor() {
   // constructor(date, startTime, endTime) {
-  constructor(date, week, startTime, endTime) {
+  constructor(date, startTime, endTime) {
     this.date = date || "2019-01-01";
-    // this.week = week || "日";
     this.week = moment(date).format("dd") || "日";
     this.startTime = startTime || "08:00";
     this.endTime = endTime || "21:00";
@@ -44,11 +43,12 @@ class TimeSlot {
     let st = startTime || "08:00";
     let et = endTime || "21:00";
     // return Array.from(Array(12).keys(), x => x + 9);
-    let spanOfTime = TimeSlotUtil.getSpanOfTime(st, et) || 13;
+    // let spanOfTime = TimeSlotUtil.getSpanOfTime(st, et) || 13;
+    let spanOfTime = TimeSlot.getSpanOfTime(st, et) || 13;
     // console.log("spanOfTime =>", spanOfTime);
     // let k = Array.from(Array(1 + TimeSlot.getSpanOfTime()).keys(), x => {
     let k = Array.from(Array(1 + spanOfTime).keys(), x => {
-      return x + TimeSlotUtil.getHours(st);
+      return x + TimeSlot.getHours(st);
     });
     // console.log("array =>", k);
     // let k = Array.from(Array(1 + this.getSpanOfTime()).keys(), x => {
@@ -71,12 +71,7 @@ class TimeSlot {
       this.TimeSlotMap.set(v, this.TimeSlotMap.get(v) + 1);
     });
   }
-}
 
-/**
- * Utitity クラス
- */
-class TimeSlotUtil {
   static getHours(time) {
     // console.log("getHours time =>", time);
     // let oDate = new Date(`${date} ${time}`);
@@ -109,10 +104,47 @@ class TimeSlotUtil {
   }
 }
 
+/**
+ * Utitity クラス
+ */
+// class TimeSlotUtil {
+//   static getHours(time) {
+//     // console.log("getHours time =>", time);
+//     // let oDate = new Date(`${date} ${time}`);
+//     let houre = moment(time, "hh:mm").format("H");
+//     houre = parseInt(houre, 10);
+//     // let d = new Date("1992-05-29" + " 09:00");
+//     // let d = new Date(`${this.date} ${t}`);
+//     // console.log("getHours => ", houre);
+//     return houre;
+//   }
+
+//   static getSpanOfTime(startTime, endTime) {
+//     // let et = this.getHours(this.endTime);
+//     // let st = this.getHours(this.startTime);
+//     let et = this.getHours(endTime);
+//     let st = this.getHours(startTime);
+//     // console.log(st, et);
+//     return et - st;
+//   }
+
+//   static getTimeSlot(it, ot) {
+//     let inTime = this.getHours(it);
+//     let outTime = this.getHours(ot);
+//     let timeSlot = [];
+//     let stayTime = outTime - inTime;
+//     for (let i = 0; i <= stayTime; i++) {
+//       timeSlot.push(inTime + i);
+//     }
+//     return timeSlot;
+//   }
+// }
+
 // let ts = new TimeSlot("2019-06-17");
 // let ts = new TimeSlot("2019-06-17", "09:00", "20:00");
 // let timeslot = new TimeSlot("2019-06-19", "水", "09:00", "20:00");
-let timeslot = new TimeSlot("2019-06-19", "水");
+// let timeslot = new TimeSlot("2019-06-19", "水");
+let timeslot = new TimeSlot("2019-06-19");
 timeslot.initTimeSlot();
 
 // moment("123", "hmm").format("HH:mm") === "01:23";
@@ -136,10 +168,16 @@ timeslot.initTimeSlot();
 // );
 // ts.sumTimeSlot(timeslot);
 
-timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("10:12", "16:26"));
-timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("9:12", "15:26"));
-timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("11:12", "13:26"));
-timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("19:12", "20:26"));
+timeslot.sumTimeSlot(TimeSlot.getTimeSlot("10:12", "16:26"));
+timeslot.sumTimeSlot(TimeSlot.getTimeSlot("9:12", "15:26"));
+timeslot.sumTimeSlot(TimeSlot.getTimeSlot("11:12", "13:26"));
+timeslot.sumTimeSlot(TimeSlot.getTimeSlot("19:12", "20:26"));
+
+// timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("10:12", "16:26"));
+// timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("9:12", "15:26"));
+// timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("11:12", "13:26"));
+// timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("19:12", "20:26"));
+
 // timeslot.sumTimeSlot(TimeSlotUtil.getTimeSlot("8:12", "21:26"));
 
 // ts.sumTimeSlot(TimeSlot.getTimeSlot("09:12", "13:26"));
